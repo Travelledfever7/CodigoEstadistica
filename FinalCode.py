@@ -17,7 +17,7 @@ print(" Iniciando modelo híbrido (25 variables)...\n")
 
 
 data = pd.read_csv(
-    r"\resultados.csv",
+    r"resultados.csv",
     encoding='latin-1',
     sep=',',
     low_memory=False
@@ -185,6 +185,23 @@ plt.figure(figsize=(9, 7))
 plt.barh(importancias['Variable'], importancias['Importancia'], color='skyblue')
 plt.title("Importancia de Variables (XGBoost)")
 plt.xlabel("Importancia")
+plt.tight_layout()
+plt.show()
+
+
+plt.figure(figsize=(10, 7))
+corr = data[features_para_graficar + [target]].corr()
+sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title("Matriz de correlación - Variables socioeconómicas y puntaje promedio")
+plt.tight_layout()
+plt.show()
+
+
+plt.figure(figsize=(8, 6))
+plt.hist(data['PUNTAJE_PROMEDIO'], bins=30, edgecolor='black', color='teal')
+plt.title("Distribución del puntaje promedio Saber Pro")
+plt.xlabel("Puntaje promedio")
+plt.ylabel("Número de estudiantes")
 plt.tight_layout()
 plt.show()
 
